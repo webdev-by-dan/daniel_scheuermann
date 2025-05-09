@@ -438,36 +438,63 @@
     <!-- ===================== SCRIPTS ===================== -->
     <!-- Put this right before the closing </body> tag,
      after your other JS (jQuery/Bootstrap/etc.) -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const form       = document.getElementById('contact_form');
-        const submitBtn  = form.querySelector('button[type="submit"], input[type="submit"]');
-      
-        /* -- build the little “Sent!” badge only once -- */
-        const sentBadge  = document.createElement('span');
-        sentBadge.textContent = 'Sent!';
-        sentBadge.style.cssText = `
-              display: none;
-              margin-left: .75rem;
-              font-weight: 600;
-              color: #4CAF50;          /* light green */
-              transition: opacity .3s ease;
-        `;
-        submitBtn.after(sentBadge);
-      
-        /* -- intercept the form submit -- */
-        form.addEventListener('submit', evt => {
-          evt.preventDefault();          // stop the normal page reload
-          form.reset();                  // clear every input/textarea/select
-      
-          /* show the badge, then fade it out */
-          sentBadge.style.opacity = '1';
-          sentBadge.style.display = 'inline';
-          setTimeout(() => sentBadge.style.opacity = '0', 2000);  // fade
-          setTimeout(() => sentBadge.style.display = 'none', 2600);
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const form      = document.getElementById('contact_form');
+          const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+        
+          /* 1. Build the light‑green badge once */
+          const sentBadge = document.createElement('span');
+          sentBadge.textContent = 'Sent!';
+          sentBadge.style.cssText = `
+              display:none;
+              margin-left:.75rem;
+              font-weight:600;
+              color:#4CAF50;          /* light green */
+              transition:opacity .3s ease;
+          `;
+          submitBtn.after(sentBadge);
+        
+          /* 2. Handle the submit */
+          form.addEventListener('submit', evt => {
+            /*  ── Only continue if the form is actually valid ──  */
+            if (!form.checkValidity()) {            // HTML5 constraint check
+              /* Let the browser (or validator.js) show its messages */
+              return;
+            }
+            evt.preventDefault();                   // Stop the normal POST
+                                                    // (remove this line if you *do* want a page reload)
+        
+            /* ---- OPTIONAL: send the form via fetch/AJAX here ----
+              fetch(form.action, { method:'POST', body:new FormData(form) })
+                .then(r => r.ok && afterSend());
+              return;
+            ------------------------------------------------------ */
+        
+            afterSend();                            // For simple “reset + badge” demo
+          });
+        
+          /* 3. What happens once the form *has* been sent */
+          function afterSend() {
+            /* a. Clear any Bootstrap‑validator / validator.js leftovers */
+            form.querySelectorAll('.has-error, .is-invalid').forEach(el =>
+              el.classList.remove('has-error', 'is-invalid')
+            );
+            form.querySelectorAll('.help-block.with-errors, .invalid-feedback')
+                .forEach(el => (el.innerHTML = ''));
+        
+            /* b. Reset field values */
+            form.reset();
+        
+            /* c. Pop the badge in, then fade it away */
+            sentBadge.style.display = 'inline';
+            requestAnimationFrame(() => sentBadge.style.opacity = '1');   // paint, then fade
+            setTimeout(() => sentBadge.style.opacity = '0', 2000);
+            setTimeout(() => sentBadge.style.display = 'none', 2600);
+          }
         });
-      });
-    </script>
+      </script>
+      
   
     <script>
       /* Wait until everything is downloaded, then fade the overlay out */
