@@ -399,8 +399,20 @@
                               </div>
                             </div>
                             <div class="right-column">
+                              <!-- add a class so the rule is easy to target -->
+                              <style>
+                                /* put this in your main CSS file */
+                                .no-resize { resize: none; }
+                              </style>
+
                               <div class="form-group form-group-with-icon">
-                                <textarea id="form_message" name="message" class="form-control" placeholder="" rows="7" required="required" data-error="Please, leave me a message."></textarea>
+                                <textarea id="form_message"
+                                          name="message"
+                                          class="form-control no-resize"
+                                          placeholder=""
+                                          rows="7"
+                                          required
+                                          data-error="Please, leave me a message."></textarea>
                                 <label>Message</label>
                                 <div class="form-control-border"></div>
                                 <div class="help-block with-errors"></div>
