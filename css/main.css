@@ -2989,7 +2989,7 @@ blockquote {
   #mobilePreloader.preloader--fade {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .35s ease, visibility .35s ease;
+    transition: opacity .2s ease, visibility .2s ease;
   }
   
 
