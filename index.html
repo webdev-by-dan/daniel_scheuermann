@@ -424,7 +424,17 @@
       </div>
 
     <!-- ===================== SCRIPTS ===================== -->
-
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contact_form');
+    
+        // Clear all inputs & textareas after a successful submit
+        form.addEventListener('submit', () => {
+          setTimeout(() => form.reset(), 0);
+        });
+      });
+    </script>
+    
     <script>
       /* Wait until everything is downloaded, then fade the overlay out */
       window.addEventListener('load', function () {
