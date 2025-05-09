@@ -198,7 +198,7 @@
                 </div>
 
                 <!-- Skills -->
-                <div class="col-sm-5">
+                <div class="col-sm-5 mtop2">
                   <!-- Technical Skills -->
                   <div class="block-title"><h3>Technical <span>Skills</span></h3></div>
                   <div class="skills-info skills-second-style">
@@ -229,44 +229,31 @@
             <!-- ===== PORTFOLIO ===== -->
 
             <style>
-              /* === Portfolio cards ============================================== */
-              .portfolio-card {
-                /* card look */
-                background: #fff;
-                margin: 2em 2em 0em 0em;
-                border: 2px solid black;
-                width: 45% !important;
-                border-radius: 10px;
-                overflow: hidden;
-                transition: transform .25s ease, box-shadow .25s ease;
-                text-align: center;          /* keeps title/label centered */
-              }
+              @media (max-width: 768px) {
+                section[data-id="portfolio"],
+                .section-content,
+                .portfolio-content,
+                .portfolio-grid {
+                  width: 100% !important;
+                  max-width: 100% !important;
+                }
 
-              .portfolio-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 8px 20px rgba(0,0,0,.12);
-              }
+                .portfolio-grid.two-columns {
+                  display: block; /* Stack cards vertically on mobile */
+                }
 
-              /* force every preview to the same shape, then crop to fit */
-              .portfolio-card .portfolio-item-img {
-                width: 100%;
-                aspect-ratio: 4 / 3;         /* adjust to taste (e.g., 16/9) */
-              }
+                .portfolio-card {
+                  width: 100% !important;
+                  box-sizing: border-box;
+                  margin-bottom: 1rem;
+                }
 
-              .portfolio-card .portfolio-item-img img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;           /* keeps the crop tight, fills space */
+                .portfolio-item-img img {
+                  width: 100%;
+                  height: auto;
+                  display: block;
+                }
               }
-
-              /* optional: tighten icon + text spacing */
-              .portfolio-card i {
-                margin-top: 12px;
-                font-size: 1.25rem;
-                color: #7c7c7c;
-              }
-              .portfolio-card .name    { margin: 10px 0 2px; font-weight: 600; }
-              .portfolio-card .category{ font-size: .85rem; color: #999; }
             </style>
             
             <section data-id="portfolio" class="animated-section"><div class="section-content">
