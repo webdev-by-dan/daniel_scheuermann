@@ -21,6 +21,13 @@
   </head>
 
   <body>
+    <!-- Mobile‑only pre‑loader -->
+    <div id="mobilePreloader" class="preloader">
+      <div class="preloader-animation">
+        <div class="preloader-spinner"></div>
+      </div>
+    </div>
+
     <!-- Animated Background -->
     <div class="lm-animated-bg" style="background-image: url(img/green-mountains.jpg);"></div>
     <!-- /Animated Background -->
@@ -417,6 +424,15 @@
       </div>
 
     <!-- ===================== SCRIPTS ===================== -->
+
+    <script>
+      /* Wait until everything is downloaded, then fade the overlay out */
+      window.addEventListener('load', function () {
+        const pre = document.getElementById('mobilePreloader');
+        if (pre) pre.classList.add('preloader--fade');
+      });
+      </script>
+      
     <script src="js/jquery.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
     <script src="js/animating.js"></script>

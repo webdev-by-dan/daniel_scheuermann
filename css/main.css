@@ -1,9 +1,3 @@
-/*
-* Template Name: BreezyCV - Resume / CV / vCard / Portfolio Template
-* Author: LMPixels
-* Author URL: http://themeforest.net/user/lmpixels
-* Version: 1.7.0
-*/
 
 /* ------------------------------------------------------------
 1. Fonts
@@ -2980,6 +2974,24 @@ blockquote {
     margin-top: 2em;
   }
 }
+
+/* ──────────────────────────────────────────────
+   Mobile‑only pre‑loader tweaks
+   – keep styles inherited from .preloader /
+     .preloader-spinner that are already in your CSS
+   – hide on tablet / desktop
+   ──────────────────────────────────────────── */
+   @media (min-width: 1025px) {
+    #mobilePreloader { display: none !important; }
+  }
+  
+  /* fade‑out helper */
+  #mobilePreloader.preloader--fade {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease, visibility .35s ease;
+  }
+  
 
 /* v1.7.0 */
 /* Alerts */
