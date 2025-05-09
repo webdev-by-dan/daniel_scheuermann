@@ -436,17 +436,39 @@
       </div>
 
     <!-- ===================== SCRIPTS ===================== -->
+    <!-- Put this right before the closing </body> tag,
+     after your other JS (jQuery/Bootstrap/etc.) -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('contact_form');
-    
-        // Clear all inputs & textareas after a successful submit
-        form.addEventListener('submit', () => {
-          setTimeout(() => form.reset(), 0);
+        const form       = document.getElementById('contact_form');
+        const submitBtn  = form.querySelector('button[type="submit"], input[type="submit"]');
+      
+        /* -- build the little “Sent!” badge only once -- */
+        const sentBadge  = document.createElement('span');
+        sentBadge.textContent = 'Sent!';
+        sentBadge.style.cssText = `
+              display: none;
+              margin-left: .75rem;
+              font-weight: 600;
+              color: #4CAF50;          /* light green */
+              transition: opacity .3s ease;
+        `;
+        submitBtn.after(sentBadge);
+      
+        /* -- intercept the form submit -- */
+        form.addEventListener('submit', evt => {
+          evt.preventDefault();          // stop the normal page reload
+          form.reset();                  // clear every input/textarea/select
+      
+          /* show the badge, then fade it out */
+          sentBadge.style.opacity = '1';
+          sentBadge.style.display = 'inline';
+          setTimeout(() => sentBadge.style.opacity = '0', 2000);  // fade
+          setTimeout(() => sentBadge.style.display = 'none', 2600);
         });
       });
     </script>
-    
+  
     <script>
       /* Wait until everything is downloaded, then fade the overlay out */
       window.addEventListener('load', function () {
